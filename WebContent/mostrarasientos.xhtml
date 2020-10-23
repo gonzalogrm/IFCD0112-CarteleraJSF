@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+		<title>Asientos JSF</title>
+	</h:head> 
+	<h:body> 
+		<h1>Asientos</h1>
+
+		<!--  
+        <h:dataTable  id="row" value="#{filtro.asientosArray}" var="row">
+		    <h:column>
+		    <h:dataTable id="col" value="#{row}" var="col">
+		        <h:column>
+		            <h:graphicImage value="/img/asientodisponible.png" />
+		        </h:column>
+		    </h:dataTable>
+		    </h:column>
+		</h:dataTable>
+		-->
+		<h:form>
+			<table>
+			    <ui:repeat value="#{filtro.asientosArray}" var="row">
+			        <tr>
+			            <ui:repeat value="#{row}" var="e">
+			                <td>
+			                	<!-- #{column} <h:graphicImage value="/img/asientodisponible.png" />-->
+								<h:graphicImage value="/img/#{e.urlimagen}" />
+								<h:selectBooleanCheckbox value="#{e.reservado}" rendered="#{e.disponible}">
+									<f:selectItems itemValue="#{e.asiento},#{e.id_horario}" itemLabel="#{e.asiento},#{e.id_horario}"/>
+								</h:selectBooleanCheckbox>
+			                </td>
+			            </ui:repeat>
+			        </tr>
+			    </ui:repeat>
+			</table>
+			
+			<br></br>
+			<h:outputText value="#{filtro.mensajeError}" />
+				
+			<br></br>
+			<h:commandButton action="#{filtro.realizarReserva()}" value="Hacer Reserva" />
+		</h:form>
+	</h:body> 
+</html>

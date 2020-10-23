@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+		<title>Cartelera JSF</title>
+	</h:head> 
+	<h:body> 
+		<h1>Cartelera JSF</h1>
+	
+		<h2>Buscar</h2>
+		<h:form>
+			Cine <h:selectOneMenu value="#{filtro.id_cine}">
+				<f:selectItems value="#{filtro.todosCines}" var="e"
+				itemLabel="#{e.nombre}"
+				itemValue="#{e.id_cine}"
+				/>
+			</h:selectOneMenu> <br/>
+			
+			Categoría <h:selectOneMenu value="#{filtro.categoria}">
+				<f:selectItems value="#{filtro.todasCategorias}" var="e"/>
+			</h:selectOneMenu> <br/>
+					
+			Género <h:selectOneMenu value="#{filtro.genero}">
+				<f:selectItems value="#{filtro.todosGeneros}" var="e"/>
+			</h:selectOneMenu> <br/>
+			
+
+			<h:commandButton action="#{filtro.filtrarCarteleras()}" value="Buscar" /><br/>
+			<h:commandButton action="#{filtro.resetList()}" value="Mostrar todos" /><br/>
+		</h:form>
+		
+		<h2>Películas</h2>
+		<h:dataTable value="#{filtro.carteleras}" var="e">
+			<h:column>
+				<f:facet name="header">
+                	<f:verbatim>Imagen</f:verbatim>
+            	</f:facet>
+				<h:graphicImage value="/img/#{e.urlimagen}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+                	<f:verbatim>Datos</f:verbatim>
+            	</f:facet>
+            	Titulo Película: <h:outputText value="#{e.titulo}" /><br></br>
+				Nombre Cine: <h:outputText value="#{e.nombre}" /><br></br>
+				Duración: <h:outputText value="#{e.duracion}" /><br></br>
+				Sinopsis: <h:outputText value="#{e.sinopsis}" /><br></br>   
+				Género: <h:outputText value="#{e.genero}" /><br></br>   
+				Categoria: <h:outputText value="#{e.categoria}" /><br></br>   
+				Precio: <h:outputText value="#{e.precio}" /><br></br>   
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+                	<f:verbatim>Detalles</f:verbatim>
+            	</f:facet>
+            	<h:form>
+					<h:commandLink action="#{filtro.detalleCartelera(e.id_cartelera)}" value="Ver detalles" /><br/>
+				</h:form>
+			</h:column>
+		</h:dataTable>
+		
+	</h:body> 
+</html>

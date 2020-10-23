@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+		<title>Asientos JSF</title>
+	</h:head> 
+	<h:body> 
+		<h1>Reserva</h1>
+		<h2>Película</h2>
+		<h:graphicImage value="/img/#{filtro.carteleraDetalle.urlimagen}" /><br></br>
+		Titulo Película: <h:outputText value="#{filtro.carteleraDetalle.titulo}" /><br></br>
+		Nombre Cine: <h:outputText value="#{filtro.carteleraDetalle.nombre}" /><br></br>
+		Duración: <h:outputText value="#{filtro.carteleraDetalle.duracion}" /><br></br>
+		Sinopsis: <h:outputText value="#{filtro.carteleraDetalle.sinopsis}" /><br></br>   
+		Género: <h:outputText value="#{filtro.carteleraDetalle.genero}" /><br></br>   
+		Categoria: <h:outputText value="#{filtro.carteleraDetalle.categoria}" /><br></br>   
+		Precio: <h:outputText value="#{filtro.carteleraDetalle.precio}" /><br></br>   
+		
+		<h2>Asientos</h2>
+		<h:dataTable value="#{filtro.reservaAsientos}" var="a">
+			<h:column>
+				<f:facet name="header">
+                	<f:verbatim>Asiento reservado</f:verbatim>
+            	</f:facet>
+				Fila: <h:outputText value="#{a.fila}" /><br></br>   
+				Numero Asiento: <h:outputText value="#{a.asiento}" /><br></br>   
+			</h:column>
+		</h:dataTable>
+		
+		<h2>Precio total</h2>
+		Total: <h:outputText value="#{filtro.precioReserva}" /><br></br>   
+		
+		<br></br> 
+		<h:form>
+			<h:commandLink action="index" value="Volver a index" /><br/>
+		</h:form>
+	</h:body> 
+</html>
